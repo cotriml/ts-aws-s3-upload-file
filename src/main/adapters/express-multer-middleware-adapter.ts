@@ -6,7 +6,7 @@ export const adaptMulterMiddleware = (middleware: Middleware) => {
     const httpResponse = await middleware.handle(req, res)
 
     if (httpResponse.statusCode === 200) {
-      httpResponse.body(req, res, (error) => {
+      await httpResponse.body(req, res, (error) => {
         if (error) {
           res.status(400).json(error)
         } else {

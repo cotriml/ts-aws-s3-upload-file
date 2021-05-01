@@ -1,6 +1,7 @@
 import { Controller, HttpResponse } from '@/presentation/protocols'
-import { ok, serverError } from '@/presentation/helpers'
+import { badRequest, ok, serverError } from '@/presentation/helpers'
 import { UploadFile } from '@/domain/usecases'
+import { InvalidParamError } from '../errors'
 
 export class UploadFileController implements Controller {
   constructor (
@@ -9,8 +10,13 @@ export class UploadFileController implements Controller {
 
   async handle (request: UploadFileController.Request): Promise<HttpResponse> {
     try {
-      const response = await this.uploadFile.upload(request.file)
-      return ok(response)
+      const { file } = request
+      if (file) {
+        const response = await this.uploadFile.upload(request.file)
+        return ok(response)
+      } else {
+        return badRequest(new InvalidParamError('file'))
+      }
     } catch (error) {
       return serverError(error)
     }
