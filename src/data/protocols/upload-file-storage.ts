@@ -5,6 +5,6 @@ export interface UploadFileStorage {
 }
 
 export namespace UploadFileStorage {
-  export type Result = any
-  export type Params = UploadFile.Result
+  export type Result = UploadFile.Result
+  export type Params = UploadFile.Params
 }
