@@ -14,7 +14,7 @@ export class AwsS3Adapter implements UploadFileStorage {
       Body: data.buffer
     }
 
-    const test = await s3.upload(params).promise()
-    return test
+    const response = await s3.upload(params).promise()
+    return response
   }
 }
