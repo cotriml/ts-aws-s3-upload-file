@@ -1,9 +1,5 @@
 .DS_Store
 node_modules
 dist
-coverage
 .env
-data
-!src/data
-!tests/data
 .vscode
